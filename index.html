@@ -88,7 +88,7 @@
     <script>
         async function fetchQuote() {
             try {
-                let response = await fetch('https://zenquotes.io/api/random');
+                let response = await fetch('https://zenquotes.io/api/quotes');
                 let data = await response.json();
                 document.getElementById('quote-text').textContent = `"${data[0].q}"`;
                 document.getElementById('quote-author').textContent = `- ${data[0].a}`;
