@@ -3,25 +3,25 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Random Quote Generator</title>
+    <title>Quote Generator</title>
     <style>
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
         }
+
         body {
             min-height: 100vh;
             background: linear-gradient(to bottom, #0b0b2b, #1b2735 70%, #090a0f);
             overflow: hidden;
             display: flex;
-            flex-direction: column;
             justify-content: center;
             align-items: center;
             color: white;
             font-family: Arial, sans-serif;
-            text-align: center;
         }
+
         .stars {
             width: 1px;
             height: 1px;
@@ -42,6 +42,7 @@
                 95vw 75vh 2px white;
             animation: twinkle 8s infinite linear;
         }
+
         .shooting-star {
             position: absolute;
             width: 100px;
@@ -49,44 +50,28 @@
             background: linear-gradient(90deg, white, transparent);
             animation: shoot 3s infinite ease-in;
         }
+
         .shooting-star:nth-child(1) { top: 20%; left: -100px; animation-delay: 0s; }
         .shooting-star:nth-child(2) { top: 35%; left: -100px; animation-delay: 1s; }
         .shooting-star:nth-child(3) { top: 50%; left: -100px; animation-delay: 2s; }
+
         @keyframes twinkle {
             0%, 100% { opacity: 0.8; }
             50% { opacity: 0.4; }
         }
+
         @keyframes shoot {
             0% { transform: translateX(0) translateY(0) rotate(25deg); opacity: 1; }
             100% { transform: translateX(120vw) translateY(50vh) rotate(25deg); opacity: 0; }
         }
-        #quote-box {
-            background: rgba(255, 255, 255, 0.1);
+
+        .quote-container {
+            background: rgba(0, 0, 0, 0.8);
             padding: 20px;
             border-radius: 10px;
-            box-shadow: 0 4px 8px rgba(0,0,0,0.2);
-            max-width: 500px;
-        }
-        #quote {
-            font-size: 1.5em;
-            margin-bottom: 10px;
-        }
-        #author {
-            font-style: italic;
-            color: #ddd;
-        }
-        button {
-            margin-top: 20px;
-            padding: 10px 15px;
-            border: none;
-            background: #007bff;
-            color: white;
-            font-size: 1em;
-            cursor: pointer;
-            border-radius: 5px;
-        }
-        button:hover {
-            background: #0056b3;
+            max-width: 600px;
+            text-align: center;
+            box-shadow: 0 0 10px rgba(255, 255, 255, 0.2);
         }
     </style>
 </head>
@@ -95,26 +80,24 @@
     <div class="shooting-star"></div>
     <div class="shooting-star"></div>
     <div class="shooting-star"></div>
-    <div class="shooting-star"></div>
-    <div class="shooting-star"></div>
-    <div id="quote-box">
-        <p id="quote">Loading...</p>
-        <p id="author"></p>
-        <button onclick="getQuote()">New Quote</button>
+    <div class="quote-container" id="quote-box">
+        <p id="quote-text">Loading...</p>
+        <p id="quote-author"></p>
     </div>
 
     <script>
-        async function getQuote() {
+        async function fetchQuote() {
             try {
-                let response = await fetch("https://zenquotes.io/api/random");
+                let response = await fetch('https://zenquotes.io/api/random');
                 let data = await response.json();
-                document.getElementById("quote").innerText = `"${data[0].q}"`;
-                document.getElementById("author").innerText = `- ${data[0].a}`;
+                document.getElementById('quote-text').textContent = `"${data[0].q}"`;
+                document.getElementById('quote-author').textContent = `- ${data[0].a}`;
             } catch (error) {
-                document.getElementById("quote").innerText = "Failed to load quote. Try again!";
+                document.getElementById('quote-text').textContent = "Failed to load quote.";
+                document.getElementById('quote-author').textContent = "";
             }
         }
-        getQuote();
+        fetchQuote();
     </script>
 </body>
 </html>
