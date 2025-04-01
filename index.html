@@ -171,33 +171,19 @@
   { "quote": "It does not matter how slowly you go as long as you do not stop.", "author": "Confucius" }
 ];
 
-function displayQuotes() {
-    const container = document.getElementById('quotes-container');
-    quotes.forEach(quoteObj => {
-        const quoteElement = document.createElement('div');
-        const quoteText = document.createElement('p');
-        const authorText = document.createElement('p');
-        
-        quoteText.textContent = `"${quoteObj.quote}"`;
-        authorText.textContent = `- ${quoteObj.author}`;
-        
-        quoteElement.appendChild(quoteText);
-        quoteElement.appendChild(authorText);
-        
-        // Add some basic styling
-        quoteElement.style.marginBottom = "20px";
-        quoteElement.style.fontFamily = "Arial, sans-serif";
-        quoteElement.style.fontSize = "18px";
-        quoteElement.style.lineHeight = "1.5";
-        
-        container.appendChild(quoteElement);
-    });
-}
+  // Function to display a random quote
+        function displayRandomQuote() {
+            // Pick a random index from the quotes array
+            const randomIndex = Math.floor(Math.random() * quotes.length);
+            const randomQuote = quotes[randomIndex];
 
-    // Call generateQuote when the page is fully loaded
-    window.onload = function() {
-        generateQuote();
-    };
+            // Display the quote text and author
+            document.getElementById("quote-text").textContent = randomQuote.text;
+            document.getElementById("quote-author").textContent = randomQuote.author;
+        }
+
+        // Call the function to display a random quote on page load
+        displayRandomQuote();
 </script>
 </body>
 </html>
