@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Random Quote Generator</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        body {
+            min-height: 100vh;
+            background: linear-gradient(to bottom, #0b0b2b, #1b2735 70%, #090a0f);
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            color: white;
+            font-family: Arial, sans-serif;
+            text-align: center;
+        }
+        .stars {
+            width: 1px;
+            height: 1px;
+            position: absolute;
+            background: white;
+            box-shadow: 2vw 5vh 2px white, 10vw 8vh 2px white, 15vw 15vh 1px white,
+                22vw 22vh 1px white, 28vw 12vh 2px white, 32vw 32vh 1px white,
+                38vw 18vh 2px white, 42vw 35vh 1px white, 48vw 25vh 2px white,
+                53vw 42vh 1px white, 58vw 15vh 2px white, 63vw 38vh 1px white,
+                68vw 28vh 2px white, 73vw 45vh 1px white, 78vw 32vh 2px white,
+                83vw 48vh 1px white, 88vw 20vh 2px white, 93vw 52vh 1px white,
+                98vw 35vh 2px white, 5vw 60vh 1px white, 12vw 65vh 2px white,
+                18vw 72vh 1px white, 25vw 78vh 2px white, 30vw 85vh 1px white,
+                35vw 68vh 2px white, 40vw 82vh 1px white, 45vw 92vh 2px white,
+                50vw 75vh 1px white, 55vw 88vh 2px white, 60vw 95vh 1px white,
+                65vw 72vh 2px white, 70vw 85vh 1px white, 75vw 78vh 2px white,
+                80vw 92vh 1px white, 85vw 82vh 2px white, 90vw 88vh 1px white,
+                95vw 75vh 2px white;
+            animation: twinkle 8s infinite linear;
+        }
+        .shooting-star {
+            position: absolute;
+            width: 100px;
+            height: 2px;
+            background: linear-gradient(90deg, white, transparent);
+            animation: shoot 3s infinite ease-in;
+        }
+        .shooting-star:nth-child(1) { top: 20%; left: -100px; animation-delay: 0s; }
+        .shooting-star:nth-child(2) { top: 35%; left: -100px; animation-delay: 1s; }
+        .shooting-star:nth-child(3) { top: 50%; left: -100px; animation-delay: 2s; }
+        @keyframes twinkle {
+            0%, 100% { opacity: 0.8; }
+            50% { opacity: 0.4; }
+        }
+        @keyframes shoot {
+            0% { transform: translateX(0) translateY(0) rotate(25deg); opacity: 1; }
+            100% { transform: translateX(120vw) translateY(50vh) rotate(25deg); opacity: 0; }
+        }
+        #quote-box {
+            background: rgba(255, 255, 255, 0.1);
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+            max-width: 500px;
+        }
+        #quote {
+            font-size: 1.5em;
+            margin-bottom: 10px;
+        }
+        #author {
+            font-style: italic;
+            color: #ddd;
+        }
+        button {
+            margin-top: 20px;
+            padding: 10px 15px;
+            border: none;
+            background: #007bff;
+            color: white;
+            font-size: 1em;
+            cursor: pointer;
+            border-radius: 5px;
+        }
+        button:hover {
+            background: #0056b3;
+        }
+    </style>
+</head>
+<body>
+    <div class="stars"></div>
+    <div class="shooting-star"></div>
+    <div class="shooting-star"></div>
+    <div class="shooting-star"></div>
+    <div class="shooting-star"></div>
+    <div class="shooting-star"></div>
+    <div id="quote-box">
+        <p id="quote">Loading...</p>
+        <p id="author"></p>
+        <button onclick="getQuote()">New Quote</button>
+    </div>
+
+    <script>
+        async function getQuote() {
+            try {
+                let response = await fetch("https://zenquotes.io/api/random");
+                let data = await response.json();
+                document.getElementById("quote").innerText = `"${data[0].q}"`;
+                document.getElementById("author").innerText = `- ${data[0].a}`;
+            } catch (error) {
+                document.getElementById("quote").innerText = "Failed to load quote. Try again!";
+            }
+        }
+        getQuote();
+    </script>
+</body>
+</html>
