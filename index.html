@@ -194,8 +194,10 @@ function displayQuotes() {
     });
 }
 
-// Call the function to display quotes
-displayQuotes();
+    // Call generateQuote when the page is fully loaded
+    window.onload = function() {
+        generateQuote();
+    };
 </script>
 </body>
 </html>
