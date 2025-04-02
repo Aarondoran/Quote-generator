@@ -210,6 +210,17 @@
         }
 
         setInterval(createShootingStar, 500);
+        function displayRandomQuote() {
+    const randomIndex = Math.floor(Math.random() * quotes.length);
+    const quote = quotes[randomIndex];
+
+    document.getElementById("quote-text").textContent = `"${quote.quote}"`;
+    document.getElementById("quote-author").textContent = `- ${quote.author}`;
+}
+
+// Display a random quote on page load
+window.onload = displayRandomQuote;
+
     </script>
 </body>
 </html>
