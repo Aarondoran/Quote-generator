@@ -122,6 +122,8 @@ img {
   font-family: Arial, sans-serif;
   margin: 50px auto;
   transition: all 0.3s ease-in-out;
+        align-items: flex-start; /* Align both quote and author to the left */
+    padding-left: 20px; /* Push everything to the left */
 }
 
 #quote-text {
@@ -129,12 +131,14 @@ img {
   font-style: italic;
   margin-bottom: 10px;
   word-wrap: break-word;
+    margin-bottom: 10px; /* Space between quote text and author */
 }
 
 #quote-author {
   font-size: 1.2em;
   font-weight: bold;
   opacity: 0.8;
+     margin-left: 10px; /* Optional: Add a little space to the left of the author text */
 }
 
 @keyframes move-background {
