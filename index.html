@@ -5,25 +5,88 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Inspirational Quotes</title>
  <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
+      * {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
 
-        body {
-            min-height: 100vh;
-            background: linear-gradient(to bottom, #0b0b2b, #1b2735 70%, #090a0f);
-            overflow: hidden;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            color: white;
-            font-family: Arial, sans-serif;
-        }
+body {
+  min-height: 100vh;
+  background: linear-gradient(to bottom, #0b0b2b, #1b2735 70%, #090a0f);
+  overflow: hidden;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: white;
+  font-family: Arial, sans-serif;
+}
 
-        .star {
-  $star-count: 50;
+.background-container {
+  position: fixed;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
+}
+
+.stars {
+  background: black url(https://s3-us-west-2.amazonaws.com/s.cdpn.io/1231630/stars.png) repeat;
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  display: block;
+  z-index: 0;
+}
+
+.twinkling {
+  width: 10000px;
+  height: 100%;
+  background: transparent url("https://s3-us-west-2.amazonaws.com/s.cdpn.io/1231630/twinkling.png") repeat;
+  background-size: 1000px 1000px;
+  position: absolute;
+  right: 0;
+  top: 0;
+  bottom: 0;
+  z-index: 2;
+
+  -moz-animation: move-background 70s linear infinite;
+  -ms-animation: move-background 70s linear infinite;
+  -o-animation: move-background 70s linear infinite;
+  -webkit-animation: move-background 70s linear infinite;
+  animation: move-background 70s linear infinite;
+}
+
+.clouds {
+  width: 10000px;
+  height: 100%;
+  background: transparent url("https://s3-us-west-2.amazonaws.com/s.cdpn.io/1231630/clouds_repeat.png") repeat;
+  background-size: 1000px 1000px;
+  position: absolute;
+  right: 0;
+  top: 0;
+  bottom: 0;
+  z-index: 3;
+
+  -moz-animation: move-background 150s linear infinite;
+  -ms-animation: move-background 150s linear infinite;
+  -o-animation: move-background 150s linear infinite;
+  -webkit-animation: move-background 150s linear infinite;
+  animation: move-background 150s linear infinite;
+}
+
+img {
+  height: 70vh;
+  width: 70vh;
+  position: absolute;
+  z-index: 3;
+  right: 20px;
+}
+
+.star {
+  --star-count: 50;
 
   @for $i from 1 through $star-count {
     &:nth-child(#{$i}) {
@@ -48,41 +111,79 @@
   }
 }
 
+.quote-box {
+  background: rgba(0, 0, 0, 0.8);
+  padding: 20px;
+  border-radius: 10px;
+  max-width: 600px;
+  text-align: center;
+  box-shadow: 0 0 10px rgba(255, 255, 255, 0.2);
+  color: white;
+  font-family: Arial, sans-serif;
+  margin: 50px auto;
+  transition: all 0.3s ease-in-out;
+        align-items: flex-start; /* Align both quote and author to the left */
+    padding-left: 20px; /* Push everything to the left */
+}
 
-        /* Dynamic styling for the quote box */
-        .quote-container {
-            background: rgba(0, 0, 0, 0.8);
-            padding: 20px;
-            border-radius: 10px;
-            max-width: 600px;
-            text-align: center;
-            box-shadow: 0 0 10px rgba(255, 255, 255, 0.2);
-            color: white;
-            font-family: Arial, sans-serif;
-            margin: 50px auto;
-            transition: all 0.3s ease-in-out;
-        }
+#quote-text {
+  font-size: 1.2em;
+  font-weight: bold;
+  opacity: 0.8;
+    margin-bottom: 10px; /* Space between quote text and author */
+}
 
+#quote-author {
+  font-size: 1.2em;
+  font-weight: bold;
+  opacity: 0.8;
+     margin-left: 10px; /* Optional: Add a little space to the left of the author text */
+}
 
-     #quote-text {
-            font-size: 1.5em;
-            font-weight: bold;
-            opacity: 0.8;
-           font-style: italic;
-            margin-bottom: 10px;
-            word-wrap: break-word;
-        }
+@keyframes move-background {
+  from {
+    -webkit-transform: translate3d(0px, 0px, 0px);
+  }
+  to {
+    -webkit-transform: translate3d(1000px, 0px, 0px);
+  }
+}
 
-        #quote-author {
-            font-size: 1.2em;
-            font-weight: bold;
-            opacity: 0.8;
-        }
+@-webkit-keyframes move-background {
+  from {
+    -webkit-transform: translate3d(0px, 0px, 0px);
+  }
+  to {
+    -webkit-transform: translate3d(1000px, 0px, 0px);
+  }
+}
+
+@-moz-keyframes move-background {
+  from {
+    -webkit-transform: translate3d(0px, 0px, 0px);
+  }
+  to {
+    -webkit-transform: translate3d(1000px, 0px, 0px);
+  }
+}
+
+@-webkit-keyframes move-background {
+  from {
+    -webkit-transform: translate3d(0px, 0px, 0px);
+  }
+  to {
+    -webkit-transform: translate3d(1000px, 0px, 0px);
+  }
+}
+
     </style>
 </head>
 <body>
-    <div class="stars">
-  <div class="star"></div>
+<div class="background-container">
+  <img src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/1231630/moon2.png" alt="">
+  <div class="stars"></div>
+  <div class="twinkling"></div>
+  <div class="clouds"></div>
 </div>
 
     <div class="quote-box">
@@ -175,44 +276,20 @@
   { "quote": "It does not matter how slowly you go as long as you do not stop.", "author": "Confucius" }
 ];
         
-        function displayRandomQuote() {
-            const randomIndex = Math.floor(Math.random() * quotes.length);
-            const randomQuote = quotes[randomIndex];
 
-            document.getElementById("quote-text").textContent = `"${randomQuote.quote}"`;
-            document.getElementById("quote-author").textContent = `- ${randomQuote.author}`;
-        }
-
-        window.onload = displayRandomQuote;
-
-        function createShootingStar() {
-            const star = document.createElement("div");
-            star.classList.add("shooting-star");
-            document.body.appendChild(star);
-            
-            const startX = Math.random() * window.innerWidth;
-            const startY = Math.random() * window.innerHeight * 0.5;
-            star.style.left = `${startX}px`;
-            star.style.top = `${startY}px`;
-            
-            setTimeout(() => {
-                star.remove();
-            }, 3000);
-        }
-
-        setInterval(createShootingStar, 500);
-        function displayRandomQuote() {
+function displayQuote() {
+    // Pick a random index from the quotes array
     const randomIndex = Math.floor(Math.random() * quotes.length);
     const quote = quotes[randomIndex];
 
-    document.getElementById("quote-text").textContent = `"${quote.quote}"`;
-    document.getElementById("quote-author").textContent = `- ${quote.author}`;
+    // Display the quote text and author
+    document.getElementById('quote-text').innerText = `"${quote.quote}"`;
+    document.getElementById('quote-author').innerText = `- ${quote.author}`;
 }
 
-// Display a random quote on page load
-window.onload = displayRandomQuote;
+// Initial quote display
+displayQuote();
 
     </script>
 </body>
 </html>
-
