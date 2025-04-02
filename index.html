@@ -65,6 +65,7 @@
             100% { transform: translateX(120vw) translateY(50vh) rotate(25deg); opacity: 0; }
         }
 
+        /* Dynamic styling for the quote box */
         .quote-container {
             background: rgba(0, 0, 0, 0.8);
             padding: 20px;
@@ -72,6 +73,23 @@
             max-width: 600px;
             text-align: center;
             box-shadow: 0 0 10px rgba(255, 255, 255, 0.2);
+            color: white;
+            font-family: Arial, sans-serif;
+            margin: 50px auto;
+            transition: all 0.3s ease-in-out;
+        }
+
+        #quote-text {
+            font-size: 1.5em;
+            font-style: italic;
+            margin-bottom: 10px;
+            word-wrap: break-word;
+        }
+
+        #quote-author {
+            font-size: 1.2em;
+            font-weight: bold;
+            opacity: 0.8;
         }
     </style>
 </head>
