@@ -21,32 +21,49 @@
             color: white;
             font-family: Arial, sans-serif;
         }
-
-        .star {
-  $star-count: 50;
-
-  @for $i from 1 through $star-count {
-    &:nth-child(#{$i}) {
-      --star-tail-length: #{random_range(500em, 750em) / 100};
-      --top-offset: #{random_range(0vh, 10000vh) / 100};
-      --fall-duration: #{random_range(6000, 12000s) / 1000};
-      --fall-delay: #{random_range(0, 10000s) / 1000};
-      
-      position: absolute;
-      top: var(--top-offset);
-      left: 0;
-      width: var(--star-tail-length);
-      height: var(--star-tail-height);
-      color: var(--star-color);
-      background: linear-gradient(45deg, currentColor, transparent);
-      border-radius: 50%;
-      filter: drop-shadow(0 0 6px currentColor);
-      transform: translate3d(104em, 0, 0);
-      animation: fall var(--fall-duration) var(--fall-delay) linear infinite, 
-                 tail-fade var(--tail-fade-duration) var(--fall-delay) ease-out infinite;
-    }
+     @keyframes rotate {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
   }
 }
+
+.gradient {
+  --size: 750px;
+  --speed: 50s;
+  --easing: cubic-bezier(0.8, 0.2, 0.2, 0.8);
+
+  width: var(--size);
+  height: var(--size);
+  filter: blur(calc(var(--size) / 5));
+  background-image: linear-gradient(hsl(222, 84, 60, 100%), hsl(164, 79, 71));
+  animation: rotate var(--speed) var(--easing) alternate infinite;
+  border-radius: 30% 70% 70% 30% / 30% 30% 70% 70%;
+}
+
+@media (min-width: 720px) {
+  .gradient {
+    --size: 500px;
+  }
+}
+
+body {
+  background-color: #071c39;
+  position: absolute;
+  inset: 0;
+  display: flex;
+  place-content: center;
+  align-items: center;
+  overflow: hidden;
+}
+
+/* This is just to transition when you change the viewport size. */
+* {
+  transition: all 0.5s ease-out;
+}
+
 
 
         /* Dynamic styling for the quote box */
@@ -78,9 +95,7 @@
     </style>
 </head>
 <body>
-    <div class="stars">
-  <div class="star"></div>
-</div>
+<div class="gradient"></div>
 
     <div class="quote-box">
         <p id="quote-text">"Loading..."</p>
