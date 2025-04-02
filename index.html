@@ -3,8 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Quote Generator</title>
-    <style>
+    <title>Inspirational Quotes</title>
+ <style>
         * {
             margin: 0;
             padding: 0;
@@ -94,17 +94,12 @@
     </style>
 </head>
 <body>
-    <div class="stars"></div>
-    <div class="shooting-star"></div>
-    <div class="shooting-star"></div>
-    <div class="shooting-star"></div>
-    <div class="quote-container" id="quote-box">
-        <p id="quote-text">Loading...</p>
-        <p id="quote-author"></p>
+    <div class="quote-box">
+        <p id="quote-text">"Loading..."</p>
+        <p id="quote-author">- Loading...</p>
     </div>
-
-<script>
-    const quotes = [
+    <script>
+  const quotes = [
   { "quote": "Life is about making an impact, not making an income.", "author": "Kevin Kruse" },
   { "quote": "Whatever the mind of man can conceive and believe, it can achieve.", "author": "Napoleon Hill" },
   { "quote": "Strive not to be a success, but rather to be of value.", "author": "Albert Einstein" },
@@ -188,20 +183,34 @@
   { "quote": "I have learned over the years that when one's mind is made up, this diminishes fear.", "author": "Rosa Parks" },
   { "quote": "It does not matter how slowly you go as long as you do not stop.", "author": "Confucius" }
 ];
-
-  // Function to display a random quote
+        
         function displayRandomQuote() {
-            // Pick a random index from the quotes array
             const randomIndex = Math.floor(Math.random() * quotes.length);
             const randomQuote = quotes[randomIndex];
 
-            // Display the quote text and author
-            document.getElementById("quote-text").textContent = randomQuote.text;
-            document.getElementById("quote-author").textContent = randomQuote.author;
+            document.getElementById("quote-text").textContent = `"${randomQuote.quote}"`;
+            document.getElementById("quote-author").textContent = `- ${randomQuote.author}`;
         }
 
-        // Call the function to display a random quote on page load
-        displayRandomQuote();
-</script>
+        window.onload = displayRandomQuote;
+
+        function createShootingStar() {
+            const star = document.createElement("div");
+            star.classList.add("shooting-star");
+            document.body.appendChild(star);
+            
+            const startX = Math.random() * window.innerWidth;
+            const startY = Math.random() * window.innerHeight * 0.5;
+            star.style.left = `${startX}px`;
+            star.style.top = `${startY}px`;
+            
+            setTimeout(() => {
+                star.remove();
+            }, 3000);
+        }
+
+        setInterval(createShootingStar, 500);
+    </script>
 </body>
 </html>
+
