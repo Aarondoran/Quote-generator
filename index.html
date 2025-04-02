@@ -278,15 +278,18 @@ img {
 ];
         
 
-                function displayQuote() {
-            const quote = quotes[randomIndex];
-            document.getElementById('quote-text').innerText = `"${quote.quote}"`;
-            document.getElementById('quote-author').innerText = `- ${quote.author}`;
-        }
+function displayQuote() {
+    // Pick a random index from the quotes array
+    const randomIndex = Math.floor(Math.random() * quotes.length);
+    const quote = quotes[randomIndex];
 
+    // Display the quote text and author
+    document.getElementById('quote-text').innerText = `"${quote.quote}"`;
+    document.getElementById('quote-author').innerText = `- ${quote.author}`;
+}
 
-        // Initial quote display
-        displayQuote();
+// Initial quote display
+displayQuote();
 
     </script>
 </body>
