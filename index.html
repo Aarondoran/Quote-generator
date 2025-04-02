@@ -5,97 +5,183 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Inspirational Quotes</title>
  <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-
-        body {
-            min-height: 100vh;
-            background: linear-gradient(to bottom, #0b0b2b, #1b2735 70%, #090a0f);
-            overflow: hidden;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            color: white;
-            font-family: Arial, sans-serif;
-        }
-     @keyframes rotate {
-  0% {
-    transform: rotate(0deg);
-  }
-  100% {
-    transform: rotate(360deg);
-  }
-}
-
-.gradient {
-  --size: 750px;
-  --speed: 50s;
-  --easing: cubic-bezier(0.8, 0.2, 0.2, 0.8);
-
-  width: var(--size);
-  height: var(--size);
-  filter: blur(calc(var(--size) / 5));
-  background-image: linear-gradient(hsl(222, 84, 60, 100%), hsl(164, 79, 71));
-  animation: rotate var(--speed) var(--easing) alternate infinite;
-  border-radius: 30% 70% 70% 30% / 30% 30% 70% 70%;
-}
-
-@media (min-width: 720px) {
-  .gradient {
-    --size: 500px;
-  }
+      * {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
 }
 
 body {
-  background-color: #071c39;
-  position: absolute;
-  inset: 0;
-  display: flex;
-  place-content: center;
-  align-items: center;
+  min-height: 100vh;
+  background: linear-gradient(to bottom, #0b0b2b, #1b2735 70%, #090a0f);
   overflow: hidden;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: white;
+  font-family: Arial, sans-serif;
 }
 
-/* This is just to transition when you change the viewport size. */
-* {
-  transition: all 0.5s ease-out;
+.background-container {
+  position: fixed;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
 }
 
+.stars {
+  background: black url(https://s3-us-west-2.amazonaws.com/s.cdpn.io/1231630/stars.png) repeat;
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  display: block;
+  z-index: 0;
+}
 
+.twinkling {
+  width: 10000px;
+  height: 100%;
+  background: transparent url("https://s3-us-west-2.amazonaws.com/s.cdpn.io/1231630/twinkling.png") repeat;
+  background-size: 1000px 1000px;
+  position: absolute;
+  right: 0;
+  top: 0;
+  bottom: 0;
+  z-index: 2;
 
-        /* Dynamic styling for the quote box */
-        .quote-container {
-            background: rgba(0, 0, 0, 0.8);
-            padding: 20px;
-            border-radius: 10px;
-            max-width: 600px;
-            text-align: center;
-            box-shadow: 0 0 10px rgba(255, 255, 255, 0.2);
-            color: white;
-            font-family: Arial, sans-serif;
-            margin: 50px auto;
-            transition: all 0.3s ease-in-out;
-        }
+  -moz-animation: move-background 70s linear infinite;
+  -ms-animation: move-background 70s linear infinite;
+  -o-animation: move-background 70s linear infinite;
+  -webkit-animation: move-background 70s linear infinite;
+  animation: move-background 70s linear infinite;
+}
 
-        #quote-text {
-            font-size: 1.5em;
-            font-style: italic;
-            margin-bottom: 10px;
-            word-wrap: break-word;
-        }
+.clouds {
+  width: 10000px;
+  height: 100%;
+  background: transparent url("https://s3-us-west-2.amazonaws.com/s.cdpn.io/1231630/clouds_repeat.png") repeat;
+  background-size: 1000px 1000px;
+  position: absolute;
+  right: 0;
+  top: 0;
+  bottom: 0;
+  z-index: 3;
 
-        #quote-author {
-            font-size: 1.2em;
-            font-weight: bold;
-            opacity: 0.8;
-        }
+  -moz-animation: move-background 150s linear infinite;
+  -ms-animation: move-background 150s linear infinite;
+  -o-animation: move-background 150s linear infinite;
+  -webkit-animation: move-background 150s linear infinite;
+  animation: move-background 150s linear infinite;
+}
+
+img {
+  height: 70vh;
+  width: 70vh;
+  position: absolute;
+  z-index: 3;
+  right: 20px;
+}
+
+.star {
+  --star-count: 50;
+
+  @for $i from 1 through $star-count {
+    &:nth-child(#{$i}) {
+      --star-tail-length: #{random_range(500em, 750em) / 100};
+      --top-offset: #{random_range(0vh, 10000vh) / 100};
+      --fall-duration: #{random_range(6000, 12000s) / 1000};
+      --fall-delay: #{random_range(0, 10000s) / 1000};
+      
+      position: absolute;
+      top: var(--top-offset);
+      left: 0;
+      width: var(--star-tail-length);
+      height: var(--star-tail-height);
+      color: var(--star-color);
+      background: linear-gradient(45deg, currentColor, transparent);
+      border-radius: 50%;
+      filter: drop-shadow(0 0 6px currentColor);
+      transform: translate3d(104em, 0, 0);
+      animation: fall var(--fall-duration) var(--fall-delay) linear infinite, 
+                 tail-fade var(--tail-fade-duration) var(--fall-delay) ease-out infinite;
+    }
+  }
+}
+
+.quote-container {
+  background: rgba(0, 0, 0, 0.8);
+  padding: 20px;
+  border-radius: 10px;
+  max-width: 600px;
+  text-align: center;
+  box-shadow: 0 0 10px rgba(255, 255, 255, 0.2);
+  color: white;
+  font-family: Arial, sans-serif;
+  margin: 50px auto;
+  transition: all 0.3s ease-in-out;
+}
+
+#quote-text {
+  font-size: 1.5em;
+  font-style: italic;
+  margin-bottom: 10px;
+  word-wrap: break-word;
+}
+
+#quote-author {
+  font-size: 1.2em;
+  font-weight: bold;
+  opacity: 0.8;
+}
+
+@keyframes move-background {
+  from {
+    -webkit-transform: translate3d(0px, 0px, 0px);
+  }
+  to {
+    -webkit-transform: translate3d(1000px, 0px, 0px);
+  }
+}
+
+@-webkit-keyframes move-background {
+  from {
+    -webkit-transform: translate3d(0px, 0px, 0px);
+  }
+  to {
+    -webkit-transform: translate3d(1000px, 0px, 0px);
+  }
+}
+
+@-moz-keyframes move-background {
+  from {
+    -webkit-transform: translate3d(0px, 0px, 0px);
+  }
+  to {
+    -webkit-transform: translate3d(1000px, 0px, 0px);
+  }
+}
+
+@-webkit-keyframes move-background {
+  from {
+    -webkit-transform: translate3d(0px, 0px, 0px);
+  }
+  to {
+    -webkit-transform: translate3d(1000px, 0px, 0px);
+  }
+}
+
     </style>
 </head>
 <body>
-<div class="gradient"></div>
+<div class="background-container">
+  <img src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/1231630/moon2.png" alt="">
+  <div class="stars"></div>
+  <div class="twinkling"></div>
+  <div class="clouds"></div>
+</div>
 
     <div class="quote-box">
         <p id="quote-text">"Loading..."</p>
