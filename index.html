@@ -273,42 +273,16 @@ img {
   { "quote": "It does not matter how slowly you go as long as you do not stop.", "author": "Confucius" }
 ];
         
-        function displayRandomQuote() {
-            const randomIndex = Math.floor(Math.random() * quotes.length);
-            const randomQuote = quotes[randomIndex];
 
-            document.getElementById("quote-text").textContent = `"${randomQuote.quote}"`;
-            document.getElementById("quote-author").textContent = `- ${randomQuote.author}`;
+                function displayQuote() {
+            const quote = quotes[randomIndex];
+            document.getElementById('quote-text').innerText = `"${quote.quote}"`;
+            document.getElementById('quote-author').innerText = `- ${quote.author}`;
         }
 
-        window.onload = displayRandomQuote;
 
-        function createShootingStar() {
-            const star = document.createElement("div");
-            star.classList.add("shooting-star");
-            document.body.appendChild(star);
-            
-            const startX = Math.random() * window.innerWidth;
-            const startY = Math.random() * window.innerHeight * 0.5;
-            star.style.left = `${startX}px`;
-            star.style.top = `${startY}px`;
-            
-            setTimeout(() => {
-                star.remove();
-            }, 3000);
-        }
-
-        setInterval(createShootingStar, 500);
-        function displayRandomQuote() {
-    const randomIndex = Math.floor(Math.random() * quotes.length);
-    const quote = quotes[randomIndex];
-
-    document.getElementById("quote-text").textContent = `"${quote.quote}"`;
-    document.getElementById("quote-author").textContent = `- ${quote.author}`;
-}
-
-// Display a random quote on page load
-window.onload = displayRandomQuote;
+        // Initial quote display
+        displayQuote();
 
     </script>
 </body>
