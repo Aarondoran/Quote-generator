@@ -278,16 +278,13 @@ img {
         
 
 function displayQuote() {
-    // Pick a random index from the quotes array
+
     const randomIndex = Math.floor(Math.random() * quotes.length);
     const quote = quotes[randomIndex];
-
-    // Display the quote text and author
     document.getElementById('quote-text').innerText = `"${quote.quote}"`;
     document.getElementById('quote-author').innerText = `- ${quote.author}`;
 }
 
-// Initial quote display
 displayQuote();
 
     </script>
