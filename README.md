@@ -1,4 +1,5 @@
 # Quote Display App
+![GitHub last-commit](https://img.shields.io/github/last-commit/Aarondoran/Quote-generator) ![GitHub License](https://img.shields.io/github/license/Aarondoran/Quote-generator)
 
 This is a simple web app that displays a random quote from a list of quotes.
 
